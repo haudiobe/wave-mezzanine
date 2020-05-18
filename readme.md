@@ -33,10 +33,10 @@
 `./qrencode.sh`
 1. Apply QR codes to export PNGs (note that this script will take a while).      
 `./imagemagick.sh`
-1. Use QR'd PNGs as sources to generate lossless MP4 file with QR codes:      
+1. Use QR'd PNGs as sources to generate lossless MP4 file with QR codes and timecode box:      
 `ffmpeg -framerate 30 -start_number 0 -i "composited/%d.png" -c:v libx264 -preset slower -crf 5 -filter_complex "format=yuv420p,fps=fps=30,drawtext=fontfile=/usr/share/fonts/truetype/cousine/Cousine-Regular.ttf: text='%{pts \:hms}': x=(w-tw)/2: y=h-(4*lh): fontcolor=white: fontsize=60: box=1: boxborderw=20: boxcolor=Black" tos-qrs.mp4`
 1. Create frame boundary markers overlay in Gimp, export to PNG (see boundaries.xcf and boundaries.png).
-1. Create final file with frame boundary overlay, timecode and audio:    
+1. Create final file with frame boundary overlay and audio:    
 `ffmpeg -y -i tos-qrs.mp4 -i boundaries.png -i tos-30sec-audio.m4a -c:v libx264 -preset slower -crf 5 -filter_complex "[0:v][1:v] overlay=0:0,format=yuv420p,fps=fps=30" -c:a "aac" -b:a 320k -ac 2 tos-30sec-final.mp4`
 1. Verify tos-30sec-final.mp4 playback in VLC. Mobile QR reader apps are available in the Apple and Google stores to verify the QR codes in each frame against the timecode.
 
