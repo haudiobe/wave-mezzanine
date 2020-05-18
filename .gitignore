@@ -1,0 +1,15 @@
+composited/
+qr_codes/
+frames/
+final/
+*.mov
+*.mp4
+*.aac
+*.m4a
+*.png
+images.txt
+*.DS_Store
+.DS_Store
+images-frametimes.txt
+frametimes.txt
+frametimes-sss.txt
